@@ -1,40 +1,377 @@
-﻿@model ksc.Models.User
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Login</h2>
-
-<form action="/" method="POST">
-
-    <div class="row">
-        @if (ViewBag.Message != null)
-        {
-            <div class="alert alert-success">
-                <p>@ViewBag.Message</p>
-            </div>
-        }
-        <div class="col-ld-3 col-lg-offset-3">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" required name="email" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" required name="password" class="form-control" />
-            </div>
-
-            <button type="submit" class="btn btn-primary">LOGIN</button>
+﻿<section id="mu-slider">
+    <!-- Start single slider item -->
+    <div class="mu-slider-single">
+        <div class="mu-slider-img">
+            <figure>
+                <img src="~/Content/img/slider/1.jpg" alt="img">
+            </figure>
+        </div>
+        <div class="mu-slider-content">
+            <h4>Welcome To KSC</h4>
+            <span></span>
+            <h2>Helps You To Learn</h2>
         </div>
     </div>
-
-</form>
-
-
-
-    
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <!-- Start single slider item -->
+    <!-- Start single slider item -->
+    <div class="mu-slider-single">
+        <div class="mu-slider-img">
+            <figure>
+                <img src="~/Content/img/slider/2.jpg" alt="img">
+            </figure>
+        </div>
+        <div class="mu-slider-content">
+            <h4>Premiumu Quality Free Template</h4>
+            <span></span>
+            <h2>Best Education Ever</h2>
+        </div>
+    </div>
+    <!-- Start single slider item -->
+    <!-- Start single slider item -->
+    <div class="mu-slider-single">
+        <div class="mu-slider-img">
+            <figure>
+                <img src="~/Content/img/slider/3.jpg" alt="img">
+            </figure>
+        </div>
+        <div class="mu-slider-content">
+            <h4>Exclusivly For Education</h4>
+            <span></span>
+            <h2>Education For Everyone</h2>
+        </div>
+    </div>
+    <!-- Start single slider item -->
+</section>
+<!-- End Slider -->
+<!-- Start service  -->
+<section id="mu-service">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="mu-service-area">
+                    <!-- Start single service -->
+                    <div class="mu-service-single">
+                        <span class="fa fa-book"></span>
+                        <h3>Learn Online</h3>
+                        <p>
+                            KSC University has programs at the Associate, Bachelor, Master, and Doctoral levels. World Class Training Around the Globe and Around the Clock! Register Online.
+                        </p>
+                    </div>
+                    <!-- Start single service -->
+                    <!-- Start single service -->
+                    <div class="mu-service-single">
+                        <span class="fa fa-users"></span>
+                        <h3>Expert Teachers</h3>
+                        <p>
+                            Whether your setting is schools, tertiary education, workplaces or community organisations and groups, this specialisation is designed to extend your interest and deepen your knowledge.
+                        </p>
+                    </div>
+                    <!-- Start single service -->
+                    <!-- Start single service -->
+                    <div class="mu-service-single">
+                        <span class="fa fa-table"></span>
+                        <h3>Best Classrooms</h3>
+                        <p>
+                            Unsurprisingly, KSC university with the fewest students per staff member are small universities with a total enrolment of less than 5,000 students.
+                        </p>
+                    </div>
+                    <!-- Start single service -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End service  -->
+<!-- Start about us -->
+<section id="mu-about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-about-us-area">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mu-about-us-left">
+                                <!-- Start Title -->
+                                <div class="mu-title">
+                                    <h2>Who we are</h2>
+                                </div>
+                                <!-- End Title -->
+                                <p>
+                                    Right from the start, we have had a pioneering spirit.
+                                </p>
+                                <ul>
+                                    <li>We are the UK’s first polytechnic institution, established 180 years ago to educate the working people of London. We have become known for the many ways in which we help our students to realise their full potential, regardless of background.</li>
+                                    <li>Our research has impact in the world, is internationally recognised and informs our teaching.</li>
+                                    <li>We are progressive and questioning. Many of our achievements are ground-breaking, yet we are also compassionate and caring.</li>
+                                    <li>Our spirit reflects our location at the heart of a world city which is home to diverse communities and has global reach.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mu-about-us-right">
+                                <a id="mu-abtus-video" href="https://www.youtube.com/embed/HN3pm9qYAUs" target="mutube-video">
+                                    <img src="~/Content/img/about-us.jpg" alt="img">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End about us -->
+<!-- Start about us counter -->
+<section id="mu-abtus-counter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-abtus-counter-area">
+                    <div class="row">
+                        <!-- Start counter item -->
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="mu-abtus-counter-single">
+                                <span class="fa fa-book"></span>
+                                <h4 class="counter">568</h4>
+                                <p>Subjects</p>
+                            </div>
+                        </div>
+                        <!-- End counter item -->
+                        <!-- Start counter item -->
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="mu-abtus-counter-single">
+                                <span class="fa fa-users"></span>
+                                <h4 class="counter">3500</h4>
+                                <p>Students</p>
+                            </div>
+                        </div>
+                        <!-- End counter item -->
+                        <!-- Start counter item -->
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="mu-abtus-counter-single">
+                                <span class="fa fa-flask"></span>
+                                <h4 class="counter">65</h4>
+                                <p>Modern Lab</p>
+                            </div>
+                        </div>
+                        <!-- End counter item -->
+                        <!-- Start counter item -->
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="mu-abtus-counter-single no-border">
+                                <span class="fa fa-user-secret"></span>
+                                <h4 class="counter">250</h4>
+                                <p>Teachers</p>
+                            </div>
+                        </div>
+                        <!-- End counter item -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End about us counter -->
+<!-- Start features section -->
+<section id="mu-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="mu-features-area">
+                    <!-- Start Title -->
+                    <div class="mu-title">
+                        <h2>Our Features</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ipsa ea maxime mollitia, vitae
+                            voluptates, quod at, saepe reprehenderit totam aliquam architecto fugiat sunt animi!
+                        </p>
+                    </div>
+                    <!-- End Title -->
+                    <!-- Start features content -->
+                    <div class="mu-features-content">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4  col-sm-6">
+                                <div class="mu-single-feature">
+                                    <span class="fa fa-book"></span>
+                                    <h4>Professional Courses</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                        itaque sint labore similique maxime natus eum.
+                                    </p>
+                                    <a href="#">Read More</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="mu-single-feature">
+                                    <span class="fa fa-users"></span>
+                                    <h4>Expert Teachers</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                        itaque sint labore similique maxime natus eum.
+                                    </p>
+                                    <a href="#">Read More</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="mu-single-feature">
+                                    <span class="fa fa-laptop"></span>
+                                    <h4>Online Learning</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                        itaque sint labore similique maxime natus eum.
+                                    </p>
+                                    <a href="#">Read More</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="mu-single-feature">
+                                    <span class="fa fa-microphone"></span>
+                                    <h4>Audio Lessons</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                        itaque sint labore similique maxime natus eum.
+                                    </p>
+                                    <a href="#">Read More</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="mu-single-feature">
+                                    <span class="fa fa-film"></span>
+                                    <h4>Video Lessons</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                        itaque sint labore similique maxime natus eum.
+                                    </p>
+                                    <a href="#">Read More</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="mu-single-feature">
+                                    <span class="fa fa-certificate"></span>
+                                    <h4>Professional Certificate</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                        itaque sint labore similique maxime natus eum.
+                                    </p>
+                                    <a href="#">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End features content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End features section -->
+<!-- Start our teacher -->
+<section id="mu-our-teacher">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-our-teacher-area">
+                    <!-- begain title -->
+                    <div class="mu-title">
+                        <h2>Our Teachers</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, repudiandae, suscipit repellat minus
+                            molestiae ea.
+                        </p>
+                    </div>
+                    <!-- end title -->
+                    <!-- begain our teacher content -->
+                    <div class="mu-our-teacher-content">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3  col-sm-6">
+                                <div class="mu-our-teacher-single">
+                                    <figure class="mu-our-teacher-img">
+                                        <img src="~/Content/img/teachers/teacher-01.png" alt="teacher img">
+                                        <div class="mu-our-teacher-social">
+                                            <a href="#"><span class="fa fa-facebook"></span></a>
+                                            <a href="#"><span class="fa fa-twitter"></span></a>
+                                            <a href="#"><span class="fa fa-linkedin"></span></a>
+                                            <a href="#"><span class="fa fa-google-plus"></span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="mu-ourteacher-single-content">
+                                        <h4>Brian Dean</h4>
+                                        <span>Math Teacher</span>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
+                                            odio dignissimos. Eligendi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="mu-our-teacher-single">
+                                    <figure class="mu-our-teacher-img">
+                                        <img src="~/Content/img/teachers/teacher-02.png" alt="teacher img">
+                                        <div class="mu-our-teacher-social">
+                                            <a href="#"><span class="fa fa-facebook"></span></a>
+                                            <a href="#"><span class="fa fa-twitter"></span></a>
+                                            <a href="#"><span class="fa fa-linkedin"></span></a>
+                                            <a href="#"><span class="fa fa-google-plus"></span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="mu-ourteacher-single-content">
+                                        <h4>James Hein</h4>
+                                        <span>Physics Teacher</span>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
+                                            odio dignissimos. Eligendi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="mu-our-teacher-single">
+                                    <figure class="mu-our-teacher-img">
+                                        <img src="~/Content/img/teachers/teacher-03.png" alt="teacher img">
+                                        <div class="mu-our-teacher-social">
+                                            <a href="#"><span class="fa fa-facebook"></span></a>
+                                            <a href="#"><span class="fa fa-twitter"></span></a>
+                                            <a href="#"><span class="fa fa-linkedin"></span></a>
+                                            <a href="#"><span class="fa fa-google-plus"></span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="mu-ourteacher-single-content">
+                                        <h4>Rebeca Michel</h4>
+                                        <span>English Teacher</span>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
+                                            odio dignissimos. Eligendi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="mu-our-teacher-single">
+                                    <figure class="mu-our-teacher-img">
+                                        <img src="~/Content/img/teachers/teacher-04.png" alt="teacher img">
+                                        <div class="mu-our-teacher-social">
+                                            <a href="#"><span class="fa fa-facebook"></span></a>
+                                            <a href="#"><span class="fa fa-twitter"></span></a>
+                                            <a href="#"><span class="fa fa-linkedin"></span></a>
+                                            <a href="#"><span class="fa fa-google-plus"></span></a>
+                                        </div>
+                                    </figure>
+                                    <div class="mu-ourteacher-single-content">
+                                        <h4>John Doe</h4>
+                                        <span>Biology Teacher</span>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
+                                            odio dignissimos. Eligendi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End our teacher content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End our teacher -->
