@@ -4,116 +4,105 @@
     <EntitySetMapping Name="Activities">
       <EntityTypeMapping TypeName="KSCModel.Activity">
         <MappingFragment StoreEntitySet="Activity">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="fee" ColumnName="fee" />
-          <ScalarProperty Name="payment_methods_id" ColumnName="payment_methods_id" />
-          <ScalarProperty Name="eligibility_criteria" ColumnName="eligibility_criteria" />
-          <ScalarProperty Name="guest_name" ColumnName="guest_name" />
-          <ScalarProperty Name="topic" ColumnName="topic" />
-          <ScalarProperty Name="prize_details" ColumnName="prize_details" />
-          <ScalarProperty Name="terms" ColumnName="terms" />
-          <ScalarProperty Name="apply_procedure" ColumnName="apply_procedure" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="apply_procedure" ColumnName="apply_procedure" />
+          <ScalarProperty Name="terms" ColumnName="terms" />
+          <ScalarProperty Name="prize_details" ColumnName="prize_details" />
+          <ScalarProperty Name="topic" ColumnName="topic" />
+          <ScalarProperty Name="guest_name" ColumnName="guest_name" />
+          <ScalarProperty Name="eligibility_criteria" ColumnName="eligibility_criteria" />
+          <ScalarProperty Name="payment_methods_id" ColumnName="payment_methods_id" />
+          <ScalarProperty Name="fee" ColumnName="fee" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ActivityUsers">
       <EntityTypeMapping TypeName="KSCModel.ActivityUser">
         <MappingFragment StoreEntitySet="ActivityUser">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="KSCModel.Category">
         <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cities">
       <EntityTypeMapping TypeName="KSCModel.City">
         <MappingFragment StoreEntitySet="City">
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Countries">
       <EntityTypeMapping TypeName="KSCModel.Country">
         <MappingFragment StoreEntitySet="Country">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PaymentMethods">
       <EntityTypeMapping TypeName="KSCModel.PaymentMethod">
         <MappingFragment StoreEntitySet="PaymentMethod">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="KSCModel.Role">
         <MappingFragment StoreEntitySet="Role">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Subscribes">
       <EntityTypeMapping TypeName="KSCModel.Subscribe">
         <MappingFragment StoreEntitySet="Subscribe">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="KSCModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="KSCModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserDetails">
       <EntityTypeMapping TypeName="KSCModel.UserDetail">
         <MappingFragment StoreEntitySet="UserDetail">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="first_name" ColumnName="first_name" />
-          <ScalarProperty Name="last_name" ColumnName="last_name" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="city" ColumnName="city" />
-          <ScalarProperty Name="country" ColumnName="country" />
-          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

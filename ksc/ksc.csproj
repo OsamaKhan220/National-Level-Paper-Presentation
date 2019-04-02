@@ -138,6 +138,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,9 +183,6 @@
     <Compile Include="Models\Subscribe.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -213,6 +211,66 @@
     <Content Include="Content\css\theme-color\red-theme.css" />
     <Content Include="Content\css\theme-color\violet-theme.css" />
     <Content Include="Content\css\theme-color\yellow-theme.css" />
+    <Content Include="Content\Dashboard\css\basictable.css" />
+    <Content Include="Content\Dashboard\css\bootstrap.min.css" />
+    <Content Include="Content\Dashboard\css\font-awesome.css" />
+    <Content Include="Content\Dashboard\css\icon-font.min.css" />
+    <Content Include="Content\Dashboard\css\jqcandlestick.css" />
+    <Content Include="Content\Dashboard\css\jquery-ui.css" />
+    <Content Include="Content\Dashboard\css\lightbox.css" />
+    <Content Include="Content\Dashboard\css\monthly.css" />
+    <Content Include="Content\Dashboard\css\morris.css" />
+    <Content Include="Content\Dashboard\css\style.css" />
+    <Content Include="Content\Dashboard\css\table-style.css" />
+    <Content Include="Content\Dashboard\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Dashboard\images\close.png" />
+    <Content Include="Content\Dashboard\images\closew.gif" />
+    <Content Include="Content\Dashboard\images\cross.png" />
+    <Content Include="Content\Dashboard\images\g1.jpg" />
+    <Content Include="Content\Dashboard\images\g2.jpg" />
+    <Content Include="Content\Dashboard\images\g3.jpg" />
+    <Content Include="Content\Dashboard\images\g4.jpg" />
+    <Content Include="Content\Dashboard\images\g5.jpg" />
+    <Content Include="Content\Dashboard\images\g6.jpg" />
+    <Content Include="Content\Dashboard\images\g7.jpg" />
+    <Content Include="Content\Dashboard\images\g8.jpg" />
+    <Content Include="Content\Dashboard\images\g9.jpg" />
+    <Content Include="Content\Dashboard\images\grid.png" />
+    <Content Include="Content\Dashboard\images\icon_sprite.png" />
+    <Content Include="Content\Dashboard\images\in.jpg" />
+    <Content Include="Content\Dashboard\images\in1.jpg" />
+    <Content Include="Content\Dashboard\images\in10.jpg" />
+    <Content Include="Content\Dashboard\images\in11.jpg" />
+    <Content Include="Content\Dashboard\images\in2.jpg" />
+    <Content Include="Content\Dashboard\images\in3.jpg" />
+    <Content Include="Content\Dashboard\images\in4.jpg" />
+    <Content Include="Content\Dashboard\images\in5.jpg" />
+    <Content Include="Content\Dashboard\images\in6.jpg" />
+    <Content Include="Content\Dashboard\images\in7.jpg" />
+    <Content Include="Content\Dashboard\images\in8.jpg" />
+    <Content Include="Content\Dashboard\images\in9.jpg" />
+    <Content Include="Content\Dashboard\images\leftw.gif" />
+    <Content Include="Content\Dashboard\images\next.png" />
+    <Content Include="Content\Dashboard\images\phon.png" />
+    <Content Include="Content\Dashboard\images\prev.png" />
+    <Content Include="Content\Dashboard\images\rightw.gif" />
+    <Content Include="Content\Dashboard\images\right_arrow.png" />
+    <Content Include="Content\Dashboard\images\search.png" />
+    <Content Include="Content\Dashboard\images\smile.png" />
+    <Content Include="Content\Dashboard\images\tick.png" />
+    <Content Include="Content\Dashboard\images\tick1.png" />
+    <Content Include="Content\Dashboard\js\bootstrap.min.js" />
+    <Content Include="Content\Dashboard\js\Chart.js" />
+    <Content Include="Content\Dashboard\js\jquery-2.1.4.min.js" />
+    <Content Include="Content\Dashboard\js\jquery-ui.js" />
+    <Content Include="Content\Dashboard\js\jquery.basictable.min.js" />
+    <Content Include="Content\Dashboard\js\jquery.jqcandlestick.min.js" />
+    <Content Include="Content\Dashboard\js\jquery.nicescroll.js" />
+    <Content Include="Content\Dashboard\js\lightbox-plus-jquery.min.js" />
+    <Content Include="Content\Dashboard\js\monthly.js" />
+    <Content Include="Content\Dashboard\js\morris.js" />
+    <Content Include="Content\Dashboard\js\raphael-min.js" />
+    <Content Include="Content\Dashboard\js\scripts.js" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\about-us.jpg" />
@@ -301,6 +359,13 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Dashboard\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Dashboard\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Dashboard\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Dashboard\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Dashboard\fonts\FontAwesome.otf" />
+    <Content Include="Content\Dashboard\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Dashboard\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -327,6 +392,10 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\Shared\_DashboardLayout.cshtml" />
+    <Content Include="Views\Shared\_FormLayout.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

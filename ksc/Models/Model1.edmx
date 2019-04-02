@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KSCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KSCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="id" />
@@ -18,7 +18,7 @@
           <Property Name="eligibility_criteria" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="guest_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="topic" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="prize_details" Type="varchar" MaxLength="50" />
+          <Property Name="prize_details" Type="varchar" MaxLength="500" />
           <Property Name="terms" Type="text" />
           <Property Name="apply_procedure" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="category_id" Type="int" Nullable="false" />
@@ -44,6 +44,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="country_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -74,16 +75,6 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="category_id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -106,9 +97,8 @@
           <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="city" Type="int" Nullable="false" />
-          <Property Name="country" Type="int" Nullable="false" />
           <Property Name="image" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
         </EntityType>
         <Association Name="FK_Activity_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -122,7 +112,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Activity_PaymentMethod">
+        <Association Name="FK_Activity_Payment">
           <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
           <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
           <ReferentialConstraint>
@@ -155,6 +145,18 @@
             </Principal>
             <Dependent Role="ActivityUser">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="country_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -203,18 +205,6 @@
             </Principal>
             <Dependent Role="UserDetail">
               <PropertyRef Name="city" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserDetail_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UserDetail">
-              <PropertyRef Name="country" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -239,14 +229,13 @@
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscribe" EntityType="Self.Subscribe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Activity_Category" Association="Self.FK_Activity_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Activity" EntitySet="Activity" />
           </AssociationSet>
-          <AssociationSet Name="FK_Activity_PaymentMethod" Association="Self.FK_Activity_PaymentMethod">
+          <AssociationSet Name="FK_Activity_Payment" Association="Self.FK_Activity_Payment">
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
             <End Role="Activity" EntitySet="Activity" />
           </AssociationSet>
@@ -257,6 +246,10 @@
           <AssociationSet Name="FK_ActivityUser_User" Association="Self.FK_ActivityUser_User">
             <End Role="User" EntitySet="User" />
             <End Role="ActivityUser" EntitySet="ActivityUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
           </AssociationSet>
           <AssociationSet Name="FK_Subscribe_Category" Association="Self.FK_Subscribe_Category">
             <End Role="Category" EntitySet="Category" />
@@ -274,40 +267,87 @@
             <End Role="City" EntitySet="City" />
             <End Role="UserDetail" EntitySet="UserDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserDetail_Country" Association="Self.FK_UserDetail_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="UserDetail" EntitySet="UserDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserDetail_User" Association="Self.FK_UserDetail_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserDetail" EntitySet="UserDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KSCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KSCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="KSCModel.Activity" />
+          <EntitySet Name="ActivityUsers" EntityType="KSCModel.ActivityUser" />
+          <EntitySet Name="Categories" EntityType="KSCModel.Category" />
+          <EntitySet Name="Cities" EntityType="KSCModel.City" />
+          <EntitySet Name="Countries" EntityType="KSCModel.Country" />
+          <EntitySet Name="PaymentMethods" EntityType="KSCModel.PaymentMethod" />
+          <EntitySet Name="Roles" EntityType="KSCModel.Role" />
+          <EntitySet Name="Subscribes" EntityType="KSCModel.Subscribe" />
+          <EntitySet Name="Users" EntityType="KSCModel.User" />
+          <EntitySet Name="UserDetails" EntityType="KSCModel.UserDetail" />
+          <AssociationSet Name="FK_Activity_Category" Association="KSCModel.FK_Activity_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Payment" Association="KSCModel.FK_Activity_Payment">
+            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityUser_Activity" Association="KSCModel.FK_ActivityUser_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="ActivityUser" EntitySet="ActivityUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityUser_User" Association="KSCModel.FK_ActivityUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ActivityUser" EntitySet="ActivityUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribe_Category" Association="KSCModel.FK_Subscribe_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Subscribe" EntitySet="Subscribes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="KSCModel.FK_City_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_City" Association="KSCModel.FK_UserDetail_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="KSCModel.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribe_User" Association="KSCModel.FK_Subscribe_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Subscribe" EntitySet="Subscribes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetail_User" Association="KSCModel.FK_UserDetail_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fee" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="payment_methods_id" Type="Int32" Nullable="false" />
-          <Property Name="eligibility_criteria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="guest_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="topic" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prize_details" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="eligibility_criteria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="guest_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="topic" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="prize_details" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="terms" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="apply_procedure" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apply_procedure" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="category_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Activity_Category" FromRole="Activity" ToRole="Category" />
-          <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_Activity_PaymentMethod" FromRole="Activity" ToRole="PaymentMethod" />
-          <NavigationProperty Name="ActivityUsers" Relationship="Self.FK_ActivityUser_Activity" FromRole="Activity" ToRole="ActivityUser" />
+          <NavigationProperty Name="Category" Relationship="KSCModel.FK_Activity_Category" FromRole="Activity" ToRole="Category" />
+          <NavigationProperty Name="PaymentMethod" Relationship="KSCModel.FK_Activity_Payment" FromRole="Activity" ToRole="PaymentMethod" />
+          <NavigationProperty Name="ActivityUsers" Relationship="KSCModel.FK_ActivityUser_Activity" FromRole="Activity" ToRole="ActivityUser" />
         </EntityType>
         <EntityType Name="ActivityUser">
           <Key>
@@ -316,17 +356,17 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="activity_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityUser_Activity" FromRole="ActivityUser" ToRole="Activity" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ActivityUser_User" FromRole="ActivityUser" ToRole="User" />
+          <NavigationProperty Name="Activity" Relationship="KSCModel.FK_ActivityUser_Activity" FromRole="ActivityUser" ToRole="Activity" />
+          <NavigationProperty Name="User" Relationship="KSCModel.FK_ActivityUser_User" FromRole="ActivityUser" ToRole="User" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_Category" FromRole="Category" ToRole="Activity" />
-          <NavigationProperty Name="Subscribes" Relationship="Self.FK_Subscribe_Category" FromRole="Category" ToRole="Subscribe" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="KSCModel.FK_Activity_Category" FromRole="Category" ToRole="Activity" />
+          <NavigationProperty Name="Subscribes" Relationship="KSCModel.FK_Subscribe_Category" FromRole="Category" ToRole="Subscribe" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -334,7 +374,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetail_City" FromRole="City" ToRole="UserDetail" />
+          <Property Name="country_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="KSCModel.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="UserDetails" Relationship="KSCModel.FK_UserDetail_City" FromRole="City" ToRole="UserDetail" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -342,15 +384,15 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetail_Country" FromRole="Country" ToRole="UserDetail" />
+          <NavigationProperty Name="Cities" Relationship="KSCModel.FK_City_Country" FromRole="Country" ToRole="City" />
         </EntityType>
         <EntityType Name="PaymentMethod">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_PaymentMethod" FromRole="PaymentMethod" ToRole="Activity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="KSCModel.FK_Activity_Payment" FromRole="PaymentMethod" ToRole="Activity" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -358,7 +400,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="KSCModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="Subscribe">
           <Key>
@@ -367,33 +409,23 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="category_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Subscribe_Category" FromRole="Subscribe" ToRole="Category" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Subscribe_User" FromRole="Subscribe" ToRole="User" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="KSCModel.FK_Subscribe_Category" FromRole="Subscribe" ToRole="Category" />
+          <NavigationProperty Name="User" Relationship="KSCModel.FK_Subscribe_User" FromRole="Subscribe" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <Property Name="role_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ActivityUsers" Relationship="Self.FK_ActivityUser_User" FromRole="User" ToRole="ActivityUser" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Subscribes" Relationship="Self.FK_Subscribe_User" FromRole="User" ToRole="Subscribe" />
-          <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetail_User" FromRole="User" ToRole="UserDetail" />
+          <NavigationProperty Name="ActivityUsers" Relationship="KSCModel.FK_ActivityUser_User" FromRole="User" ToRole="ActivityUser" />
+          <NavigationProperty Name="Role" Relationship="KSCModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Subscribes" Relationship="KSCModel.FK_Subscribe_User" FromRole="User" ToRole="Subscribe" />
+          <NavigationProperty Name="UserDetails" Relationship="KSCModel.FK_UserDetail_User" FromRole="User" ToRole="UserDetail" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -401,21 +433,19 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="city" Type="Int32" Nullable="false" />
-          <Property Name="country" Type="Int32" Nullable="false" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="City1" Relationship="Self.FK_UserDetail_City" FromRole="UserDetail" ToRole="City" />
-          <NavigationProperty Name="Country1" Relationship="Self.FK_UserDetail_Country" FromRole="UserDetail" ToRole="Country" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserDetail_User" FromRole="UserDetail" ToRole="User" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="City1" Relationship="KSCModel.FK_UserDetail_City" FromRole="UserDetail" ToRole="City" />
+          <NavigationProperty Name="User" Relationship="KSCModel.FK_UserDetail_User" FromRole="UserDetail" ToRole="User" />
         </EntityType>
         <Association Name="FK_Activity_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <End Type="KSCModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="KSCModel.Activity" Role="Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="id" />
@@ -425,9 +455,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Activity_PaymentMethod">
-          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
-          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+        <Association Name="FK_Activity_Payment">
+          <End Type="KSCModel.PaymentMethod" Role="PaymentMethod" Multiplicity="1" />
+          <End Type="KSCModel.Activity" Role="Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymentMethod">
               <PropertyRef Name="id" />
@@ -438,8 +468,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ActivityUser_Activity">
-          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
-          <End Role="ActivityUser" Type="Self.ActivityUser" Multiplicity="*" />
+          <End Type="KSCModel.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="KSCModel.ActivityUser" Role="ActivityUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Activity">
               <PropertyRef Name="id" />
@@ -450,8 +480,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ActivityUser_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ActivityUser" Type="Self.ActivityUser" Multiplicity="*" />
+          <End Type="KSCModel.User" Role="User" Multiplicity="1" />
+          <End Type="KSCModel.ActivityUser" Role="ActivityUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -462,8 +492,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Subscribe_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Subscribe" Type="Self.Subscribe" Multiplicity="*" />
+          <End Type="KSCModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="KSCModel.Subscribe" Role="Subscribe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="id" />
@@ -473,9 +503,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_City_Country">
+          <End Type="KSCModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="KSCModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserDetail_City">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+          <End Type="KSCModel.City" Role="City" Multiplicity="1" />
+          <End Type="KSCModel.UserDetail" Role="UserDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="id" />
@@ -485,21 +527,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserDetail_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UserDetail">
-              <PropertyRef Name="country" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="KSCModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="KSCModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="id" />
@@ -510,8 +540,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Subscribe_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Subscribe" Type="Self.Subscribe" Multiplicity="*" />
+          <End Type="KSCModel.User" Role="User" Multiplicity="1" />
+          <End Type="KSCModel.Subscribe" Role="Subscribe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -522,8 +552,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserDetail_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
+          <End Type="KSCModel.User" Role="User" Multiplicity="1" />
+          <End Type="KSCModel.UserDetail" Role="UserDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -533,59 +563,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="KSCEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Activities" EntityType="Self.Activity" />
-          <EntitySet Name="ActivityUsers" EntityType="Self.ActivityUser" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="Subscribes" EntityType="Self.Subscribe" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-          <AssociationSet Name="FK_Activity_Category" Association="Self.FK_Activity_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Activity" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Activity_PaymentMethod" Association="Self.FK_Activity_PaymentMethod">
-            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
-            <End Role="Activity" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActivityUser_Activity" Association="Self.FK_ActivityUser_Activity">
-            <End Role="Activity" EntitySet="Activities" />
-            <End Role="ActivityUser" EntitySet="ActivityUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActivityUser_User" Association="Self.FK_ActivityUser_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ActivityUser" EntitySet="ActivityUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_Category" Association="Self.FK_Subscribe_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Subscribe" EntitySet="Subscribes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserDetail_City" Association="Self.FK_UserDetail_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserDetail_Country" Association="Self.FK_UserDetail_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_User" Association="Self.FK_Subscribe_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Subscribe" EntitySet="Subscribes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserDetail_User" Association="Self.FK_UserDetail_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -595,116 +572,105 @@
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="KSCModel.Activity">
               <MappingFragment StoreEntitySet="Activity">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="fee" ColumnName="fee" />
-                <ScalarProperty Name="payment_methods_id" ColumnName="payment_methods_id" />
-                <ScalarProperty Name="eligibility_criteria" ColumnName="eligibility_criteria" />
-                <ScalarProperty Name="guest_name" ColumnName="guest_name" />
-                <ScalarProperty Name="topic" ColumnName="topic" />
-                <ScalarProperty Name="prize_details" ColumnName="prize_details" />
-                <ScalarProperty Name="terms" ColumnName="terms" />
-                <ScalarProperty Name="apply_procedure" ColumnName="apply_procedure" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="apply_procedure" ColumnName="apply_procedure" />
+                <ScalarProperty Name="terms" ColumnName="terms" />
+                <ScalarProperty Name="prize_details" ColumnName="prize_details" />
+                <ScalarProperty Name="topic" ColumnName="topic" />
+                <ScalarProperty Name="guest_name" ColumnName="guest_name" />
+                <ScalarProperty Name="eligibility_criteria" ColumnName="eligibility_criteria" />
+                <ScalarProperty Name="payment_methods_id" ColumnName="payment_methods_id" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ActivityUsers">
             <EntityTypeMapping TypeName="KSCModel.ActivityUser">
               <MappingFragment StoreEntitySet="ActivityUser">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="KSCModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="KSCModel.City">
               <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="KSCModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaymentMethods">
             <EntityTypeMapping TypeName="KSCModel.PaymentMethod">
               <MappingFragment StoreEntitySet="PaymentMethod">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="KSCModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subscribes">
             <EntityTypeMapping TypeName="KSCModel.Subscribe">
               <MappingFragment StoreEntitySet="Subscribe">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="category_id" ColumnName="category_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="KSCModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="KSCModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="KSCModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,7 +13,7 @@
     <Property Name="eligibility_criteria" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="guest_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="topic" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="prize_details" Type="varchar" MaxLength="50" />
+    <Property Name="prize_details" Type="varchar" MaxLength="500" />
     <Property Name="terms" Type="text" />
     <Property Name="apply_procedure" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="category_id" Type="int" Nullable="false" />
@@ -39,6 +39,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="country_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -69,16 +70,6 @@
     <Property Name="user_id" Type="int" Nullable="false" />
     <Property Name="category_id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -101,9 +92,8 @@
     <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="city" Type="int" Nullable="false" />
-    <Property Name="country" Type="int" Nullable="false" />
     <Property Name="image" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
   </EntityType>
   <Association Name="FK_Activity_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -117,7 +107,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Activity_PaymentMethod">
+  <Association Name="FK_Activity_Payment">
     <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
     <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
     <ReferentialConstraint>
@@ -150,6 +140,18 @@
       </Principal>
       <Dependent Role="ActivityUser">
         <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="country_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -201,18 +203,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserDetail_Country">
-    <End Role="Country" Type="Self.Country" Multiplicity="1" />
-    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Country">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="UserDetail">
-        <PropertyRef Name="country" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_UserDetail_User">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="*" />
@@ -234,14 +224,13 @@
     <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subscribe" EntityType="Self.Subscribe" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Activity_Category" Association="Self.FK_Activity_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Activity" EntitySet="Activity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Activity_PaymentMethod" Association="Self.FK_Activity_PaymentMethod">
+    <AssociationSet Name="FK_Activity_Payment" Association="Self.FK_Activity_Payment">
       <End Role="PaymentMethod" EntitySet="PaymentMethod" />
       <End Role="Activity" EntitySet="Activity" />
     </AssociationSet>
@@ -252,6 +241,10 @@
     <AssociationSet Name="FK_ActivityUser_User" Association="Self.FK_ActivityUser_User">
       <End Role="User" EntitySet="User" />
       <End Role="ActivityUser" EntitySet="ActivityUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
     </AssociationSet>
     <AssociationSet Name="FK_Subscribe_Category" Association="Self.FK_Subscribe_Category">
       <End Role="Category" EntitySet="Category" />
@@ -267,10 +260,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_UserDetail_City" Association="Self.FK_UserDetail_City">
       <End Role="City" EntitySet="City" />
-      <End Role="UserDetail" EntitySet="UserDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserDetail_Country" Association="Self.FK_UserDetail_Country">
-      <End Role="Country" EntitySet="Country" />
       <End Role="UserDetail" EntitySet="UserDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_UserDetail_User" Association="Self.FK_UserDetail_User">
