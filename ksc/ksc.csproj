@@ -396,6 +396,7 @@
     <Content Include="Views\Shared\_FormLayout.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
