@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ksc.Models.User>
+﻿@model IEnumerable<ksc.Models.UserDetail>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -10,37 +10,48 @@
     <table id="table">
         <thead>
             <tr>
-                <th>Joined at</th>
                 <th>Full Name</th>
                 <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
+                @*<th>Status</th>*@
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @*@foreach (var item in Model)
+        {
+            var details = item.UserDetails.Where(e => e.user_id == item.Id).FirstOrDefault();
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => details.created_at)
+                </td>
+                <td>
+                    @(String.Format("{0} {1}", details.first_name, details.last_name))
+                </td>
+                <td>
+                    @item.email
+                </td>
+                <td>
+                    @details.phone
+                </td>
+                <td>
+                    @(String.Format("{0} {1}, {2}", details.address,details.City1.name, details.City1.Country.name))
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }*@
+            @foreach (var item in ViewBag.Users)
             {
-                var details = item.UserDetails.Where(e => e.user_id == item.Id).FirstOrDefault();
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => details.created_at)
-                    </td>
-                    <td>
-                        @(String.Format("{0} {1}", details.first_name, details.last_name))
-                    </td>
-                    <td>
-                        @item.email
-                    </td>
-                    <td>
-                        @details.phone
-                    </td>
-                    <td>
-                        @(String.Format("{0} {1}, {2}", details.address,details.City1.name, details.City1.Country.name))
-                    </td>
+                    <td>@item.name</td>
+                    <td>@item.email</td>
+                    @*<td>(@item.status == 1? 'active': 'inactive'</td>*@
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     </td>
                 </tr>

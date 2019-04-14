@@ -11,6 +11,10 @@ namespace ksc.Controllers
     {
         public ActionResult Index()
         {
+            var categories = db.Categories.Select(c=>c);
+            ViewBag.Categories = categories.ToList();
+            var activity = db.Activities.Select(a => a);
+            ViewBag.Activity= activity.ToList();
             return View();
         }
 
@@ -56,6 +60,12 @@ namespace ksc.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public string GotoEvent(string activityId)
+        {
+            //db.Activities.
+            return activityId;
         }
     }
 }

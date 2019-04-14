@@ -179,7 +179,7 @@
                 <div class="mu-features-area">
                     <!-- Start Title -->
                     <div class="mu-title">
-                        <h2>Our Features</h2>
+                        <h2>Categories</h2>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ipsa ea maxime mollitia, vitae
                             voluptates, quod at, saepe reprehenderit totam aliquam architecto fugiat sunt animi!
@@ -189,18 +189,25 @@
                     <!-- Start features content -->
                     <div class="mu-features-content">
                         <div class="row">
-                            <div class="col-lg-4 col-md-4  col-sm-6">
-                                <div class="mu-single-feature">
-                                    <span class="fa fa-book"></span>
-                                    <h4>Professional Courses</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
-                                        itaque sint labore similique maxime natus eum.
-                                    </p>
-                                    <a href="#">Read More</a>
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <div class="col-lg-4 col-md-4  col-sm-6">
+                                    <div class="mu-single-feature">
+                                        <span class="fa fa-book"></span>
+                                        <h4>
+                                            @item.name
+                                        </h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
+                                            itaque sint labore similique maxime natus eum.
+                                        </p>
+                                        <a href="#">Suscribe</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
+
+                            }
+
+                            @*<div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="mu-single-feature">
                                     <span class="fa fa-users"></span>
                                     <h4>Expert Teachers</h4>
@@ -254,7 +261,7 @@
                                     </p>
                                     <a href="#">Read More</a>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <!-- End features content -->
@@ -272,7 +279,7 @@
                 <div class="mu-our-teacher-area">
                     <!-- begain title -->
                     <div class="mu-title">
-                        <h2>Our Teachers</h2>
+                        <h2>Feture Events</h2>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, repudiandae, suscipit repellat minus
                             molestiae ea.
@@ -282,36 +289,33 @@
                     <!-- begain our teacher content -->
                     <div class="mu-our-teacher-content">
                         <div class="row">
+                            @foreach (var item in ViewBag.Activity)
+                            { 
                             <div class="col-lg-3 col-md-3  col-sm-6">
                                 <div class="mu-our-teacher-single">
                                     <figure class="mu-our-teacher-img">
                                         <img src="~/Content/img/teachers/teacher-01.png" alt="teacher img">
                                         <div class="mu-our-teacher-social">
-                                            <a href="#"><span class="fa fa-facebook"></span></a>
-                                            <a href="#"><span class="fa fa-twitter"></span></a>
-                                            <a href="#"><span class="fa fa-linkedin"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus"></span></a>
+                                            <a href="#" onclick="gotoEvent(@item.id)">Going</a>
                                         </div>
                                     </figure>
                                     <div class="mu-ourteacher-single-content">
-                                        <h4>Brian Dean</h4>
-                                        <span>Math Teacher</span>
+                                        <h4>@item.name</h4>
+                                        <span>@item.topic</span>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
-                                            odio dignissimos. Eligendi.
+                                            @item.description
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6">
+                            }
+
+                            @*<div class="col-lg-3 col-md-3 col-sm-6">
                                 <div class="mu-our-teacher-single">
                                     <figure class="mu-our-teacher-img">
                                         <img src="~/Content/img/teachers/teacher-02.png" alt="teacher img">
                                         <div class="mu-our-teacher-social">
-                                            <a href="#"><span class="fa fa-facebook"></span></a>
-                                            <a href="#"><span class="fa fa-twitter"></span></a>
-                                            <a href="#"><span class="fa fa-linkedin"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus"></span></a>
+                                            <a href="#">Going</a>
                                         </div>
                                     </figure>
                                     <div class="mu-ourteacher-single-content">
@@ -365,7 +369,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <!-- End our teacher content -->
@@ -375,3 +379,32 @@
     </div>
 </section>
 <!-- End our teacher -->
+
+<script>
+    function gotoEvent(activityId) {
+        $.ajax({
+            type: "GET",
+            url: 'GotoEvent',
+            data: {activityId},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function () {
+                console.log('beforeSend')  
+            },
+            success: function (response) {
+                console.log('response====>', response)
+                // Looping over emloyee list and display it  
+                //$.each(response, function (index, emp) {
+                //    $('#output').append('<p>Id: ' + emp.ID + '</p>' +
+                //        '<p>Id: ' + emp.Name + '</p>');
+                //});
+            },
+            complete: function () {
+                console.log('compelete')
+            },
+            failure: function (jqXHR, textStatus, errorThrown) {
+                console.log("HTTP Status: " + jqXHR.status + "; Error Text: " + jqXHR.responseText); // Display error message  
+            }
+        });
+    }  
+</script>

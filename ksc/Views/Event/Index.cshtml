@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Manage Users</h2>
+<div class="w3l-table-info">
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Fee</th>
+                <th>Payment Methods</th>
+                <th>Eligibility Criteria</th>
+                <th>Guest Name</th>
+                <th>Topic</th>
+                <th>Prize Details</th>
+                <th>Terms</th>
+                <th>Apply Procedure</th>
+                <th>Category</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Activity)
+            {
+            <tr>
+                <td>@item.name</td>
+                <td>@item.description</td>
+                <td>@item.date</td>
+                <td>@item.fee</td>
+                <td>@item.payment_methods_id</td>
+                <td>@item.eligibility_criteria</td>
+                <td>@item.guest_name</td>
+                <td>@item.topic</td>
+                <td>@item.prize_details</td>
+                <td>@item.terms</td>
+                <td>@item.apply_procedure</td>
+                <td>@item.category_id</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,105 @@
+﻿@model ksc.Models.Activity
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>Edit User</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.id)
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eligibility Criteria</label>
+                        @Html.EditorFor(model => model.eligibility_criteria, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.eligibility_criteria, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fee</label>
+                        @Html.EditorFor(model => model.fee, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fee, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apply Procedure</label>
+                        @Html.EditorFor(model => model.apply_procedure, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.apply_procedure, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Terms</label>
+                        @Html.EditorFor(model => model.terms, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.terms, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prize Details</label>
+                        @Html.EditorFor(model => model.prize_details, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.prize_details, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Topic</label>
+                        @Html.EditorFor(model => model.topic, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.topic, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Guest Name</label>
+                        @Html.EditorFor(model => model.guest_name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.guest_name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eligibility Criteria</label>
+                        @Html.EditorFor(model => model.eligibility_criteria, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.eligibility_criteria, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        @Html.DropDownList("category_id", new SelectList(ViewBag.categories, "id", "name"), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payment Methods</label>
+                        @Html.DropDownList("payment_methods_id", new SelectList(ViewBag.payment_methods, "id", "name"), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.payment_methods_id, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<h2>Manage Users</h2>
+<div class="w3l-table-info">
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Categories)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

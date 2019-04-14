@@ -12,9 +12,9 @@ namespace ksc.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            
-            var users = db.Users.ToList();
-            return View(users);
+            var users = db.Users.Select(u => u);
+            ViewBag.Users = users.ToList();
+            return View();
         }
 
         public ActionResult Edit(int Id) {
@@ -26,12 +26,31 @@ namespace ksc.Controllers
         [HttpPost]
         public ActionResult Edit(User model)
         {
+            User nUser = db.Users.Single(u => u.Id == model.Id);
+            nUser.email = model.email;
+            nUser.name = model.name;
+            nUser.role_id = model.role_id;
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult Add() {
             ViewBag.roles = db.Roles.ToList();
             return View();
+        }
+        [HttpPost]
+        public ActionResult Add(User model)
+        {
+            db.Users.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int Id)
+        {
+            User nUser = db.Users.Single(u => u.Id == Id);
+            db.Users.Remove(nUser);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
