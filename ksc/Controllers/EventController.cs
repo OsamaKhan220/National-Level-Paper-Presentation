@@ -65,5 +65,12 @@ namespace ksc.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult ViewUser(int Id)
+        {
+            var ActivityUsers = db.ActivityUsers.Where(e => e.id == Id).ToList();
+            ViewBag.ActivityUsers = ActivityUsers;
+            return View();
+        }
     }
 }
