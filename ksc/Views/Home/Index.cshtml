@@ -201,7 +201,7 @@
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
                                             itaque sint labore similique maxime natus eum.
                                         </p>
-                                        <a href="#">Suscribe</a>
+                                        @Html.ActionLink("Suscribe", "Subscribe", new { id = item.id })
                                     </div>
                                 </div>
 
@@ -296,7 +296,7 @@
                                     <figure class="mu-our-teacher-img">
                                         <img src="~/Content/img/teachers/teacher-01.png" alt="teacher img">
                                         <div class="mu-our-teacher-social">
-                                            <a href="#" onclick="gotoEvent(@item.id)">Going</a>
+                                            @Html.ActionLink("Join", "GotoEvent", new { id = item.id }) 
                                         </div>
                                     </figure>
                                     <div class="mu-ourteacher-single-content">
@@ -381,30 +381,30 @@
 <!-- End our teacher -->
 
 <script>
-    function gotoEvent(activityId) {
-        $.ajax({
-            type: "GET",
-            url: 'GotoEvent',
-            data: {activityId},
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            beforeSend: function () {
-                console.log('beforeSend')  
-            },
-            success: function (response) {
-                console.log('response====>', response)
-                // Looping over emloyee list and display it  
-                //$.each(response, function (index, emp) {
-                //    $('#output').append('<p>Id: ' + emp.ID + '</p>' +
-                //        '<p>Id: ' + emp.Name + '</p>');
-                //});
-            },
-            complete: function () {
-                console.log('compelete')
-            },
-            failure: function (jqXHR, textStatus, errorThrown) {
-                console.log("HTTP Status: " + jqXHR.status + "; Error Text: " + jqXHR.responseText); // Display error message  
-            }
-        });
-    }  
+    //function gotoEvent(activityId) {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: 'GotoEvent',
+    //        data: {activityId},
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        beforeSend: function () {
+    //            console.log('beforeSend')  
+    //        },
+    //        success: function (response) {
+    //            console.log('response====>', response)
+    //            // Looping over emloyee list and display it  
+    //            //$.each(response, function (index, emp) {
+    //            //    $('#output').append('<p>Id: ' + emp.ID + '</p>' +
+    //            //        '<p>Id: ' + emp.Name + '</p>');
+    //            //});
+    //        },
+    //        complete: function () {
+    //            console.log('compelete')
+    //        },
+    //        failure: function (jqXHR, textStatus, errorThrown) {
+    //            console.log("HTTP Status: " + jqXHR.status + "; Error Text: " + jqXHR.responseText); // Display error message  
+    //        }
+    //    });
+    //}  
 </script>

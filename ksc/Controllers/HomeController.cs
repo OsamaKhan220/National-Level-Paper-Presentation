@@ -62,10 +62,23 @@ namespace ksc.Controllers
             return View();
         }
 
-        public string GotoEvent(string activityId)
+        public ActionResult GotoEvent(int id)
         {
-            //db.Activities.
-            return activityId;
+            var nActivityUser = new ksc.Models.ActivityUser();
+            nActivityUser.user_id = 6;
+            nActivityUser.activity_id = id;
+            db.ActivityUsers.Add(nActivityUser);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Subscribe(int id)
+        {
+            var nSubscribe = new ksc.Models.Subscribe();
+            nSubscribe.user_id = 6;
+            nSubscribe.category_id = id;
+            db.Subscribes.Add(nSubscribe);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
