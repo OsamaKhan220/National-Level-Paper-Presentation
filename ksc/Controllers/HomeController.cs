@@ -21,13 +21,16 @@ namespace ksc.Controllers
         [HttpPost]
         public ActionResult Index(LoginRequest model) {
             Session["LoggedIn"] = true;
-            return RedirectToAction("index", "dashboard");
-            //var user = db.Users.Where(e => e.email == model.Email && e.password == model.Password).FirstOrDefault();
-            //if (user != null) {
-            //    return RedirectToAction("Index","Dashboard");
-            //}
-            //ViewBag.Message = "Invalid Credentials";
-            //return RedirectToAction("Index");
+            var user = db.Users.Where(e => e.email == model.Email && e.password == model.Password).FirstOrDefault();
+            if (user != null && user.role_id == 1)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }else if (user != null && user.role_id == 2)
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.Message = "Invalid Credentials";
+            return RedirectToAction("Index");
         }
 
 
