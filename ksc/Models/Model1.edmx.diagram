@@ -25,6 +25,9 @@
         <AssociationConnector Association="KSCModel.FK_User_Role" />
         <AssociationConnector Association="KSCModel.FK_Subscribe_User" />
         <AssociationConnector Association="KSCModel.FK_UserDetail_User" />
+        <EntityTypeShape EntityType="KSCModel.ActivityWinner" Width="1.5" PointX="5.25" PointY="7.375" />
+        <AssociationConnector Association="KSCModel.FK_ActivityWinners_Activity" />
+        <AssociationConnector Association="KSCModel.FK_ActivityWinners_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,7 @@ namespace ksc.Models
         public Activity()
         {
             this.ActivityUsers = new HashSet<ActivityUser>();
+            this.ActivityWinners = new HashSet<ActivityWinner>();
         }
     
         public int id { get; set; }
@@ -38,5 +39,7 @@ namespace ksc.Models
         public virtual PaymentMethod PaymentMethod { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityUser> ActivityUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActivityWinner> ActivityWinners { get; set; }
     }
 }

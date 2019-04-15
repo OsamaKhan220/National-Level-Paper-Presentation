@@ -51,6 +51,15 @@
       <End Role="User" EntitySet="Users" />
       <End Role="UserDetail" EntitySet="UserDetails" />
     </AssociationSet>
+    <EntitySet Name="ActivityWinners" EntityType="KSCModel.ActivityWinner" />
+    <AssociationSet Name="FK_ActivityWinners_Activity" Association="KSCModel.FK_ActivityWinners_Activity">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="ActivityWinner" EntitySet="ActivityWinners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityWinners_User" Association="KSCModel.FK_ActivityWinners_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ActivityWinner" EntitySet="ActivityWinners" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Activity">
     <Key>
@@ -72,6 +81,7 @@
     <NavigationProperty Name="Category" Relationship="KSCModel.FK_Activity_Category" FromRole="Activity" ToRole="Category" />
     <NavigationProperty Name="PaymentMethod" Relationship="KSCModel.FK_Activity_Payment" FromRole="Activity" ToRole="PaymentMethod" />
     <NavigationProperty Name="ActivityUsers" Relationship="KSCModel.FK_ActivityUser_Activity" FromRole="Activity" ToRole="ActivityUser" />
+    <NavigationProperty Name="ActivityWinners" Relationship="KSCModel.FK_ActivityWinners_Activity" FromRole="Activity" ToRole="ActivityWinner" />
   </EntityType>
   <EntityType Name="ActivityUser">
     <Key>
@@ -150,6 +160,7 @@
     <NavigationProperty Name="Role" Relationship="KSCModel.FK_User_Role" FromRole="User" ToRole="Role" />
     <NavigationProperty Name="Subscribes" Relationship="KSCModel.FK_Subscribe_User" FromRole="User" ToRole="Subscribe" />
     <NavigationProperty Name="UserDetails" Relationship="KSCModel.FK_UserDetail_User" FromRole="User" ToRole="UserDetail" />
+    <NavigationProperty Name="ActivityWinners" Relationship="KSCModel.FK_ActivityWinners_User" FromRole="User" ToRole="ActivityWinner" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>
@@ -283,6 +294,40 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserDetail">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ActivityWinner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="activity_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Activity" Relationship="KSCModel.FK_ActivityWinners_Activity" FromRole="ActivityWinner" ToRole="Activity" />
+    <NavigationProperty Name="User" Relationship="KSCModel.FK_ActivityWinners_User" FromRole="ActivityWinner" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_ActivityWinners_Activity">
+    <End Type="KSCModel.Activity" Role="Activity" Multiplicity="1" />
+    <End Type="KSCModel.ActivityWinner" Role="ActivityWinner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActivityWinner">
+        <PropertyRef Name="activity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityWinners_User">
+    <End Type="KSCModel.User" Role="User" Multiplicity="1" />
+    <End Type="KSCModel.ActivityWinner" Role="ActivityWinner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActivityWinner">
         <PropertyRef Name="user_id" />
       </Dependent>
     </ReferentialConstraint>

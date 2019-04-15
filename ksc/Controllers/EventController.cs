@@ -68,9 +68,24 @@ namespace ksc.Controllers
 
         public ActionResult ViewUser(int Id)
         {
-            var ActivityUsers = db.ActivityUsers.Where(e => e.id == Id).ToList();
-            ViewBag.ActivityUsers = ActivityUsers;
+            var ActivityUsers = db.ActivityUsers.Where(e => e.activity_id == Id);
+            ViewBag.ActivityUsers = ActivityUsers.ToList();
+            
+            //foreach (var item in ActivityUsers)
+            //{
+            //    var Users = db.Users.Where(e => e.Id== item.user_id).FirstOrDefault();
+            //}
             return View();
+        }
+
+        public ActionResult MarkWinner(int userId, int activityId)
+        {
+            ActivityWinner winner = new ActivityWinner();
+            winner.user_id = userId;
+            winner.activity_id = activityId;
+            db.ActivityWinners.Add(winner);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

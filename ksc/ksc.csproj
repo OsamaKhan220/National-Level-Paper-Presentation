@@ -150,6 +150,9 @@
     <Compile Include="Models\ActivityUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivityWinner.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppModels\LoginRequest.cs" />
     <Compile Include="Models\AppModels\RegisterRequest.cs" />
     <Compile Include="Models\Category.cs">

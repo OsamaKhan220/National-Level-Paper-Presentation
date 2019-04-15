@@ -1,4 +1,4 @@
-﻿@model ksc.Models.ActivityUser
+﻿@model ksc.Models.ActivityWinner
 
 @{
     ViewBag.Title = "Index";
@@ -11,15 +11,18 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in ViewBag.ActivityUsers)
-            {
-                <tr>
-                    <td>@item</td>
-                </tr>
-            }
+             {
+            <tr>
+                <td>@item.user_id</td>
+                <td>@Html.ActionLink("Mark Winner", "MarkWinner", new { userId = item.user_id, activityId = item.activity_id })</td>
+                @*<td><a href="/Event/MarkWinner/@item.user_id/@item.activity_id">Mark Winner</a></td>*@
+            </tr>
+             }
         </tbody>
     </table>
 </div>

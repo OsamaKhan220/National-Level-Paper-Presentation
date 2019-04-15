@@ -26,6 +26,14 @@
     <Property Name="user_id" Type="int" Nullable="false" />
     <Property Name="activity_id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ActivityWinners">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="activity_id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="id" />
@@ -143,6 +151,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ActivityWinners_Activity">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="ActivityWinners" Type="Self.ActivityWinners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActivityWinners">
+        <PropertyRef Name="activity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityWinners_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ActivityWinners" Type="Self.ActivityWinners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActivityWinners">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_City_Country">
     <End Role="Country" Type="Self.Country" Multiplicity="1" />
     <End Role="City" Type="Self.City" Multiplicity="*" />
@@ -218,6 +250,7 @@
   <EntityContainer Name="KSCModelStoreContainer">
     <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActivityUser" EntityType="Self.ActivityUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityWinners" EntityType="Self.ActivityWinners" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
@@ -241,6 +274,14 @@
     <AssociationSet Name="FK_ActivityUser_User" Association="Self.FK_ActivityUser_User">
       <End Role="User" EntitySet="User" />
       <End Role="ActivityUser" EntitySet="ActivityUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityWinners_Activity" Association="Self.FK_ActivityWinners_Activity">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="ActivityWinners" EntitySet="ActivityWinners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityWinners_User" Association="Self.FK_ActivityWinners_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ActivityWinners" EntitySet="ActivityWinners" />
     </AssociationSet>
     <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
       <End Role="Country" EntitySet="Country" />

@@ -31,6 +31,14 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="activity_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ActivityWinners">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="activity_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id" />
@@ -148,6 +156,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ActivityWinners_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="ActivityWinners" Type="Self.ActivityWinners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActivityWinners">
+              <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityWinners_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ActivityWinners" Type="Self.ActivityWinners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityWinners">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_City_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="City" Type="Self.City" Multiplicity="*" />
@@ -223,6 +255,7 @@
         <EntityContainer Name="KSCModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivityUser" EntityType="Self.ActivityUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityWinners" EntityType="Self.ActivityWinners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
@@ -246,6 +279,14 @@
           <AssociationSet Name="FK_ActivityUser_User" Association="Self.FK_ActivityUser_User">
             <End Role="User" EntitySet="User" />
             <End Role="ActivityUser" EntitySet="ActivityUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityWinners_Activity" Association="Self.FK_ActivityWinners_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityWinners" EntitySet="ActivityWinners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityWinners_User" Association="Self.FK_ActivityWinners_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ActivityWinners" EntitySet="ActivityWinners" />
           </AssociationSet>
           <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
             <End Role="Country" EntitySet="Country" />
@@ -327,6 +368,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserDetail" EntitySet="UserDetails" />
           </AssociationSet>
+          <EntitySet Name="ActivityWinners" EntityType="KSCModel.ActivityWinner" />
+          <AssociationSet Name="FK_ActivityWinners_Activity" Association="KSCModel.FK_ActivityWinners_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="ActivityWinner" EntitySet="ActivityWinners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityWinners_User" Association="KSCModel.FK_ActivityWinners_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ActivityWinner" EntitySet="ActivityWinners" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Activity">
           <Key>
@@ -348,6 +398,7 @@
           <NavigationProperty Name="Category" Relationship="KSCModel.FK_Activity_Category" FromRole="Activity" ToRole="Category" />
           <NavigationProperty Name="PaymentMethod" Relationship="KSCModel.FK_Activity_Payment" FromRole="Activity" ToRole="PaymentMethod" />
           <NavigationProperty Name="ActivityUsers" Relationship="KSCModel.FK_ActivityUser_Activity" FromRole="Activity" ToRole="ActivityUser" />
+          <NavigationProperty Name="ActivityWinners" Relationship="KSCModel.FK_ActivityWinners_Activity" FromRole="Activity" ToRole="ActivityWinner" />
         </EntityType>
         <EntityType Name="ActivityUser">
           <Key>
@@ -426,6 +477,7 @@
           <NavigationProperty Name="Role" Relationship="KSCModel.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Subscribes" Relationship="KSCModel.FK_Subscribe_User" FromRole="User" ToRole="Subscribe" />
           <NavigationProperty Name="UserDetails" Relationship="KSCModel.FK_UserDetail_User" FromRole="User" ToRole="UserDetail" />
+          <NavigationProperty Name="ActivityWinners" Relationship="KSCModel.FK_ActivityWinners_User" FromRole="User" ToRole="ActivityWinner" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -563,6 +615,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ActivityWinner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="KSCModel.FK_ActivityWinners_Activity" FromRole="ActivityWinner" ToRole="Activity" />
+          <NavigationProperty Name="User" Relationship="KSCModel.FK_ActivityWinners_User" FromRole="ActivityWinner" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ActivityWinners_Activity">
+          <End Type="KSCModel.Activity" Role="Activity" Multiplicity="1" />
+          <End Type="KSCModel.ActivityWinner" Role="ActivityWinner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActivityWinner">
+              <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityWinners_User">
+          <End Type="KSCModel.User" Role="User" Multiplicity="1" />
+          <End Type="KSCModel.ActivityWinner" Role="ActivityWinner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityWinner">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -669,6 +755,15 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityWinners">
+            <EntityTypeMapping TypeName="KSCModel.ActivityWinner">
+              <MappingFragment StoreEntitySet="ActivityWinners">
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

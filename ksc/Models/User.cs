@@ -20,6 +20,7 @@ namespace ksc.Models
             this.ActivityUsers = new HashSet<ActivityUser>();
             this.Subscribes = new HashSet<Subscribe>();
             this.UserDetails = new HashSet<UserDetail>();
+            this.ActivityWinners = new HashSet<ActivityWinner>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace ksc.Models
         public virtual ICollection<Subscribe> Subscribes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDetail> UserDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActivityWinner> ActivityWinners { get; set; }
     }
 }

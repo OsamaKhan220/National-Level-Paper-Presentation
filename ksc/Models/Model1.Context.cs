@@ -35,5 +35,6 @@ namespace ksc.Models
         public virtual DbSet<Subscribe> Subscribes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<ActivityWinner> ActivityWinners { get; set; }
     }
 }
