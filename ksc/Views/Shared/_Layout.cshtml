@@ -119,12 +119,33 @@
                             <input type="password" name="Password" placeholder="******">
                             <input type="submit" value="Sign in" />
                         </form>
+                        <p style="margin-top:15px; color:#fff">Don't have an account? <a href="/Home/Register" id="mu-search-icon">Sign up</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+y    @*<div id="mu-search">
+        <div class="mu-search-area">
+            <button class="mu-search-close"><span class="fa fa-close"></span></button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Sign up</h1>
+                        <form class="mu-search-form" method="POST" action="/register">
+                            <input type="file" name="Image">
+                            <input type="text" name="Name" placeholder="Full name">
+                            <input type="email" name="Email" placeholder="abc@example.com">
+                            <input type="password" name="Password" placeholder="******">
+                            <input type="submit" value="Sign up" />
+                            <p style="margin-top:15px; color:#fff">Already have an account<a href="#" id="mu-search-icon">Sign in</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
     @RenderBody()
 
 

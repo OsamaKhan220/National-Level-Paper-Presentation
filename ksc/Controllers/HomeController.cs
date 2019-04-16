@@ -44,11 +44,20 @@ namespace ksc.Controllers
             if (user == null)
             {
                 ViewBag.Message = "User Registered.";
+                ksc.Models.User nUser = new ksc.Models.User();
+                nUser.name = model.Name;
+                nUser.email = model.Email;
+                nUser.password = model.Password;
+                nUser.role_id = 2;
+                nUser.status = 1;
+                db.Users.Add(nUser);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             else {
                 ViewBag.Message = "User Already Exist.";
+                return View();
             }
-            return RedirectToAction("Index", "Dashboard");
         }
 
         public ActionResult About()
