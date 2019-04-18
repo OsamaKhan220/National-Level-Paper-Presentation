@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,8 +25,12 @@ namespace ksc.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Add(Activity model)
+        public ActionResult Add(Activity model, HttpPostedFileBase Images)
         {
+            string filename = Path.GetFileName(Images.FileName);
+            string path = Path.Combine(Server.MapPath("~/assets/images/"), filename);
+            model.image = filename;
+            Images.SaveAs(path);
             db.Activities.Add(model);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -70,11 +75,6 @@ namespace ksc.Controllers
         {
             var ActivityUsers = db.ActivityUsers.Where(e => e.activity_id == Id);
             ViewBag.ActivityUsers = ActivityUsers.ToList();
-            
-            //foreach (var item in ActivityUsers)
-            //{
-            //    var Users = db.Users.Where(e => e.Id== item.user_id).FirstOrDefault();
-            //}
             return View();
         }
 
@@ -84,6 +84,21 @@ namespace ksc.Controllers
             winner.user_id = userId;
             winner.activity_id = activityId;
             db.ActivityWinners.Add(winner);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        
+        public ActionResult Approve(int id)
+        {
+            ksc.Models.ActivityUser Activity = db.ActivityUsers.Single(u => u.id == id);
+            Activity.status = 1;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult DisApprove(int id)
+        {
+            ksc.Models.ActivityUser Activity = db.ActivityUsers.Single(u => u.id == id);
+            Activity.status = 1;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

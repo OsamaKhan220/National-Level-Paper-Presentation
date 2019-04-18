@@ -4,30 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e03e43ceeca74481ad1a5e2acab2d121" Name="Diagram1" ZoomLevel="47">
-        <EntityTypeShape EntityType="KSCModel.Activity" Width="1.5" PointX="3" PointY="8.375" />
-        <EntityTypeShape EntityType="KSCModel.ActivityUser" Width="1.5" PointX="5.25" PointY="1.5" />
-        <EntityTypeShape EntityType="KSCModel.Category" Width="1.5" PointX="0.75" PointY="8.375" />
-        <EntityTypeShape EntityType="KSCModel.City" Width="1.5" PointX="6" PointY="13.5" />
-        <EntityTypeShape EntityType="KSCModel.Country" Width="1.5" PointX="3.75" PointY="13.75" />
-        <EntityTypeShape EntityType="KSCModel.PaymentMethod" Width="1.5" PointX="0.75" PointY="10.875" />
-        <EntityTypeShape EntityType="KSCModel.Role" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="KSCModel.Subscribe" Width="1.5" PointX="5.25" PointY="4.5" />
-        <EntityTypeShape EntityType="KSCModel.User" Width="1.5" PointX="3" PointY="4.125" />
-        <EntityTypeShape EntityType="KSCModel.UserDetail" Width="1.5" PointX="8.25" PointY="4" />
+      <Diagram DiagramId="e03e43ceeca74481ad1a5e2acab2d121" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="KSCModel.Activity" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="KSCModel.ActivityUser" Width="1.5" PointX="5.25" PointY="10.75" />
+        <EntityTypeShape EntityType="KSCModel.ActivityWinner" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="KSCModel.Category" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="KSCModel.City" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="KSCModel.Country" Width="1.5" PointX="3.75" PointY="1.125" />
+        <EntityTypeShape EntityType="KSCModel.PaymentMethod" Width="1.5" PointX="0.75" PointY="13" />
+        <EntityTypeShape EntityType="KSCModel.Role" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="KSCModel.Subscribe" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="KSCModel.User" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="KSCModel.UserDetail" Width="1.5" PointX="8.25" PointY="7.125" />
         <AssociationConnector Association="KSCModel.FK_Activity_Category" />
         <AssociationConnector Association="KSCModel.FK_Activity_Payment" />
         <AssociationConnector Association="KSCModel.FK_ActivityUser_Activity" />
+        <AssociationConnector Association="KSCModel.FK_ActivityWinners_Activity" />
         <AssociationConnector Association="KSCModel.FK_ActivityUser_User" />
+        <AssociationConnector Association="KSCModel.FK_ActivityWinners_User" />
         <AssociationConnector Association="KSCModel.FK_Subscribe_Category" />
         <AssociationConnector Association="KSCModel.FK_City_Country" />
         <AssociationConnector Association="KSCModel.FK_UserDetail_City" />
         <AssociationConnector Association="KSCModel.FK_User_Role" />
         <AssociationConnector Association="KSCModel.FK_Subscribe_User" />
         <AssociationConnector Association="KSCModel.FK_UserDetail_User" />
-        <EntityTypeShape EntityType="KSCModel.ActivityWinner" Width="1.5" PointX="5.25" PointY="7.375" />
-        <AssociationConnector Association="KSCModel.FK_ActivityWinners_Activity" />
-        <AssociationConnector Association="KSCModel.FK_ActivityWinners_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

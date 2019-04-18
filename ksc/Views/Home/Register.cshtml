@@ -4,11 +4,17 @@
     Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
 
+
+@if (ViewBag.Message != null)
+{
+    <script>alert(@ViewBag.Message);</script>
+}
+
 <div class="main-wthree">
     <div class="container">
         <div class="sin-w3-agile">
             <h2>Sign Up</h2>
-            <form  action="/Home/Register" method="POST">
+            <form  action="/Home/Register" method="POST" enctype="multipart/form-data">
                 <div class="username">
                     <span class="username">Username:</span>
                     <input type="text" required name="name" class="form-control" />
@@ -28,6 +34,11 @@
                     <span class="username">Confirm Password:</span>
                     <input type="password" required name="repassword" class="form-control" />
                     <div class="clearfix"></div>
+                </div>
+                <div class="password-agileits">
+                    <span class="file"> Profile Image
+                    </span>
+                    <input type="file" required name="Images"/>
                 </div>
                 <div class="login-w3">
                     <input type="submit" class="login" value="Sign Up">

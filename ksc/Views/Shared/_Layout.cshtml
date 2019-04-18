@@ -75,31 +75,35 @@
                     </button>
                     <!-- LOGO -->
                     <!-- TEXT BASED LOGO  -->
-                    <a class="navbar-brand" href="index.html"><i class="fa fa-university"></i><span>KSC</span></a>
+                    <a class="navbar-brand" href="/"><i class="fa fa-university"></i><span>KSC</span></a>
                     <!-- IMG BASED LOGO
                     <a class="navbar-brand" href="index.html"><img src="~/Content/img/logo.png" alt="logo"></a>  -->
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course <span class="fa fa-angle-down"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="course.html">Course Archive</a></li>
-                                <li><a href="course-detail.html">Course Detail</a></li>
-                            </ul>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#mu-our-teacher">Events</a></li>
+                        <li><a href="#mu-footer">Contact</a></li>
+                        <li>
+                            <a href="#mu-about-us">About us</a>
                         </li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <span class="fa fa-angle-down"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="blog-archive.html">Blog Archive</a></li>
-                                <li><a href="blog-single.html">Blog Single</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="404.html">404 Page</a></li>
-                        <li><a href="#" id="mu-search-icon"><i class="fa fa-sign-in"></i></a></li>
+                        @if (Session["userId"] != null)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <span class="fa fa-angle-down"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Profile", "UserProfile", new { id = @Session["userId"] })</li>
+                                    <li>@Html.ActionLink("Edit Profile", "EditUserProfile", new { id = @Session["userId"] })</li>
+                                    <li>@Html.ActionLink("My Events", "MyEvents", new { userId = @Session["userId"] })</li>
+                                    <li>@Html.ActionLink("My Subscription", "MySubscription", new { userId = @Session["userId"] })</li>
+                                    <li>@Html.ActionLink("Logout", "Logout")</li>
+                                </ul>
+                            </li>
+                        }
+                        @if (Session["userId"] == null)
+                        {
+                            <li><a href="#" id="mu-search-icon"><i class="fa fa-sign-in"></i></a></li>
+                        }
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -126,7 +130,7 @@
         </div>
     </div>
 
-y    @*<div id="mu-search">
+    @*<div id="mu-search">
         <div class="mu-search-area">
             <button class="mu-search-close"><span class="fa fa-close"></span></button>
             <div class="container">

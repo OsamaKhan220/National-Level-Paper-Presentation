@@ -409,9 +409,16 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Add.cshtml" />
     <Content Include="Views\Event\ViewUser.cshtml" />
+    <Content Include="Views\Home\ViewEvent.cshtml" />
+    <Content Include="Views\Home\MyEvents.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Home\MySubscription.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Home\EditUserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\images\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

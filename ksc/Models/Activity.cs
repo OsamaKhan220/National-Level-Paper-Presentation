@@ -34,6 +34,7 @@ namespace ksc.Models
         public string terms { get; set; }
         public string apply_procedure { get; set; }
         public int category_id { get; set; }
+        public string image { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }

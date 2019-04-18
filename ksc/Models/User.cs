@@ -18,9 +18,9 @@ namespace ksc.Models
         public User()
         {
             this.ActivityUsers = new HashSet<ActivityUser>();
+            this.ActivityWinners = new HashSet<ActivityWinner>();
             this.Subscribes = new HashSet<Subscribe>();
             this.UserDetails = new HashSet<UserDetail>();
-            this.ActivityWinners = new HashSet<ActivityWinner>();
         }
     
         public int Id { get; set; }
@@ -29,15 +29,16 @@ namespace ksc.Models
         public string password { get; set; }
         public int status { get; set; }
         public int role_id { get; set; }
+        public string image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityUser> ActivityUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActivityWinner> ActivityWinners { get; set; }
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Subscribe> Subscribes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDetail> UserDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ActivityWinner> ActivityWinners { get; set; }
     }
 }

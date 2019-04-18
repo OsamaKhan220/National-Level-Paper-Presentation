@@ -17,6 +17,7 @@
     <Property Name="terms" Type="text" />
     <Property Name="apply_procedure" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="ActivityUser">
     <Key>
@@ -25,6 +26,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="user_id" Type="int" Nullable="false" />
     <Property Name="activity_id" Type="int" Nullable="false" />
+    <Property Name="status" Type="int" />
   </EntityType>
   <EntityType Name="ActivityWinners">
     <Key>
@@ -88,6 +90,7 @@
     <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="status" Type="int" Nullable="false" />
     <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="UserDetail">
     <Key>

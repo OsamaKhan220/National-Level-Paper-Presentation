@@ -1,0 +1,38 @@
+﻿@model ksc.Models.ActivityUser
+
+@{
+    ViewBag.Title = "MyEvents";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>MyEvents</h2>
+<div class="w3l-table-info">
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.userActivity)
+            {
+            <tr>
+                <td>@item.Activity.name</td>
+                <td>@item.Activity.description</td>
+                @if (@item.status == 0)
+                {
+                    <td>In Active</td>
+                }else{
+                    <td>Active</td>
+                }
+                <td>
+                    @Html.ActionLink("Leave", "LeaveEvent", new { id = item.id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

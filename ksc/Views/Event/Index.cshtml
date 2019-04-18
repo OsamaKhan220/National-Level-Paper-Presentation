@@ -33,14 +33,14 @@
                 <td>@item.description</td>
                 <td>@item.date</td>
                 <td>@item.fee</td>
-                <td>@item.payment_methods_id</td>
+                <td>@item.PaymentMethod.name</td>
                 <td>@item.eligibility_criteria</td>
                 <td>@item.guest_name</td>
                 <td>@item.topic</td>
                 <td>@item.prize_details</td>
                 <td>@item.terms</td>
                 <td>@item.apply_procedure</td>
-                <td>@item.category_id</td>
+                <td>@item.Category.name</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                     @Html.ActionLink("View Users", "ViewUser", new { id = item.id }) |

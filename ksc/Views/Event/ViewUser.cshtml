@@ -11,14 +11,23 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th></th>
+                <th>Options</th>
+                <th>Mark Winner</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in ViewBag.ActivityUsers)
              {
             <tr>
-                <td>@item.user_id</td>
+                <td>@item.User.name</td>
+                @if (@item.status == 0)
+                {
+                    <td>@Html.ActionLink("Approve", "Approve", new { id = item.id })</td>
+                }else
+                {
+                    <td>@Html.ActionLink("DisApprove", "DisApprove", new { id = item.id })</td>
+                }
+
                 <td>@Html.ActionLink("Mark Winner", "MarkWinner", new { userId = item.user_id, activityId = item.activity_id })</td>
             </tr>
              }

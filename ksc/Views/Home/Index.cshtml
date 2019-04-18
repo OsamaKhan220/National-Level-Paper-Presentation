@@ -180,10 +180,6 @@
                     <!-- Start Title -->
                     <div class="mu-title">
                         <h2>Categories</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ipsa ea maxime mollitia, vitae
-                            voluptates, quod at, saepe reprehenderit totam aliquam architecto fugiat sunt animi!
-                        </p>
                     </div>
                     <!-- End Title -->
                     <!-- Start features content -->
@@ -201,67 +197,14 @@
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
                                             itaque sint labore similique maxime natus eum.
                                         </p>
-                                        @Html.ActionLink("Suscribe", "Subscribe", new { id = item.id })
+                                        @if (Session["userId"] != null)
+                                        {
+                                            @Html.ActionLink("Suscribe", "Subscribe", new { id = item.id, userId = @Session["userId"] })
+                                        }
                                     </div>
                                 </div>
 
                             }
-
-                            @*<div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="mu-single-feature">
-                                    <span class="fa fa-users"></span>
-                                    <h4>Expert Teachers</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
-                                        itaque sint labore similique maxime natus eum.
-                                    </p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="mu-single-feature">
-                                    <span class="fa fa-laptop"></span>
-                                    <h4>Online Learning</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
-                                        itaque sint labore similique maxime natus eum.
-                                    </p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="mu-single-feature">
-                                    <span class="fa fa-microphone"></span>
-                                    <h4>Audio Lessons</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
-                                        itaque sint labore similique maxime natus eum.
-                                    </p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="mu-single-feature">
-                                    <span class="fa fa-film"></span>
-                                    <h4>Video Lessons</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
-                                        itaque sint labore similique maxime natus eum.
-                                    </p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="mu-single-feature">
-                                    <span class="fa fa-certificate"></span>
-                                    <h4>Professional Certificate</h4>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus non dolorem excepturi libero
-                                        itaque sint labore similique maxime natus eum.
-                                    </p>
-                                    <a href="#">Read More</a>
-                                </div>
-                            </div>*@
                         </div>
                     </div>
                     <!-- End features content -->
@@ -279,97 +222,35 @@
                 <div class="mu-our-teacher-area">
                     <!-- begain title -->
                     <div class="mu-title">
-                        <h2>Feture Events</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, repudiandae, suscipit repellat minus
-                            molestiae ea.
-                        </p>
+                        <h2>Feature Events</h2>
                     </div>
                     <!-- end title -->
                     <!-- begain our teacher content -->
                     <div class="mu-our-teacher-content">
                         <div class="row">
                             @foreach (var item in ViewBag.Activity)
-                            { 
-                            <div class="col-lg-3 col-md-3  col-sm-6">
-                                <div class="mu-our-teacher-single">
-                                    <figure class="mu-our-teacher-img">
-                                        <img src="~/Content/img/teachers/teacher-01.png" alt="teacher img">
-                                        <div class="mu-our-teacher-social">
-                                            @Html.ActionLink("Join", "GotoEvent", new { id = item.id }) 
+                            {
+                                <div class="col-lg-3 col-md-3  col-sm-6">
+                                    <div class="mu-our-teacher-single">
+                                        <figure class="mu-our-teacher-img">
+                                            <img src='~/assets/images/@item.image' alt="teacher img">
+                                            <div class="mu-our-teacher-social">
+                                                @if (Session["userId"] != null)
+                                                {
+                                                    @Html.ActionLink("Join", "GotoEvent", new { id = item.id, userId = @Session["userId"] })
+                                                }
+                                            </div>
+                                        </figure>
+                                        <div class="mu-ourteacher-single-content">
+                                            <a href="/Home/ViewEvent/@item.id"><h4>@item.name</h4></a>
+                                            <span>@item.topic</span>
+                                            <p>
+                                                @item.description
+                                            </p>
                                         </div>
-                                    </figure>
-                                    <div class="mu-ourteacher-single-content">
-                                        <h4>@item.name</h4>
-                                        <span>@item.topic</span>
-                                        <p>
-                                            @item.description
-                                        </p>
                                     </div>
                                 </div>
-                            </div>
                             }
-
-                            @*<div class="col-lg-3 col-md-3 col-sm-6">
-                                <div class="mu-our-teacher-single">
-                                    <figure class="mu-our-teacher-img">
-                                        <img src="~/Content/img/teachers/teacher-02.png" alt="teacher img">
-                                        <div class="mu-our-teacher-social">
-                                            <a href="#">Going</a>
-                                        </div>
-                                    </figure>
-                                    <div class="mu-ourteacher-single-content">
-                                        <h4>James Hein</h4>
-                                        <span>Physics Teacher</span>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
-                                            odio dignissimos. Eligendi.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6">
-                                <div class="mu-our-teacher-single">
-                                    <figure class="mu-our-teacher-img">
-                                        <img src="~/Content/img/teachers/teacher-03.png" alt="teacher img">
-                                        <div class="mu-our-teacher-social">
-                                            <a href="#"><span class="fa fa-facebook"></span></a>
-                                            <a href="#"><span class="fa fa-twitter"></span></a>
-                                            <a href="#"><span class="fa fa-linkedin"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus"></span></a>
-                                        </div>
-                                    </figure>
-                                    <div class="mu-ourteacher-single-content">
-                                        <h4>Rebeca Michel</h4>
-                                        <span>English Teacher</span>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
-                                            odio dignissimos. Eligendi.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6">
-                                <div class="mu-our-teacher-single">
-                                    <figure class="mu-our-teacher-img">
-                                        <img src="~/Content/img/teachers/teacher-04.png" alt="teacher img">
-                                        <div class="mu-our-teacher-social">
-                                            <a href="#"><span class="fa fa-facebook"></span></a>
-                                            <a href="#"><span class="fa fa-twitter"></span></a>
-                                            <a href="#"><span class="fa fa-linkedin"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus"></span></a>
-                                        </div>
-                                    </figure>
-                                    <div class="mu-ourteacher-single-content">
-                                        <h4>John Doe</h4>
-                                        <span>Biology Teacher</span>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quod pariatur recusandae
-                                            odio dignissimos. Eligendi.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>*@
                         </div>
                     </div>
                     <!-- End our teacher content -->
@@ -379,32 +260,41 @@
     </div>
 </section>
 <!-- End our teacher -->
-
-<script>
-    //function gotoEvent(activityId) {
-    //    $.ajax({
-    //        type: "GET",
-    //        url: 'GotoEvent',
-    //        data: {activityId},
-    //        contentType: "application/json; charset=utf-8",
-    //        dataType: "json",
-    //        beforeSend: function () {
-    //            console.log('beforeSend')  
-    //        },
-    //        success: function (response) {
-    //            console.log('response====>', response)
-    //            // Looping over emloyee list and display it  
-    //            //$.each(response, function (index, emp) {
-    //            //    $('#output').append('<p>Id: ' + emp.ID + '</p>' +
-    //            //        '<p>Id: ' + emp.Name + '</p>');
-    //            //});
-    //        },
-    //        complete: function () {
-    //            console.log('compelete')
-    //        },
-    //        failure: function (jqXHR, textStatus, errorThrown) {
-    //            console.log("HTTP Status: " + jqXHR.status + "; Error Text: " + jqXHR.responseText); // Display error message  
-    //        }
-    //    });
-    //}  
-</script>
+<!-- Start our teacher -->
+<section id="mu-our-teacher">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-our-teacher-area">
+                    <!-- begain title -->
+                    <div class="mu-title">
+                        <h2>Event Winners</h2>
+                    </div>
+                    <!-- end title -->
+                    <!-- begain our teacher content -->
+                    <div class="mu-our-teacher-content">
+                        <div class="row">
+                            @foreach (var item in ViewBag.Winners)
+                            {
+                                <div class="col-lg-3 col-md-3  col-sm-6">
+                                    <div class="mu-our-teacher-single">
+                                        <figure class="mu-our-teacher-img">
+                                            <img src='~/assets/images/@item.User.image' alt="teacher img">
+                                            <div class="mu-our-teacher-social">
+                                            </div>
+                                        </figure>
+                                        <div class="mu-ourteacher-single-content">
+                                            <h4>@item.Activity.name</h4>
+                                            <span>@item.User.name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- End our teacher content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

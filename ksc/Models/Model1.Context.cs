@@ -27,6 +27,7 @@ namespace ksc.Models
     
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<ActivityUser> ActivityUsers { get; set; }
+        public virtual DbSet<ActivityWinner> ActivityWinners { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -35,6 +36,5 @@ namespace ksc.Models
         public virtual DbSet<Subscribe> Subscribes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
-        public virtual DbSet<ActivityWinner> ActivityWinners { get; set; }
     }
 }

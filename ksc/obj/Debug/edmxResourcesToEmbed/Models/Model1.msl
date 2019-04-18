@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Activities">
       <EntityTypeMapping TypeName="KSCModel.Activity">
         <MappingFragment StoreEntitySet="Activity">
+          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="category_id" ColumnName="category_id" />
           <ScalarProperty Name="apply_procedure" ColumnName="apply_procedure" />
           <ScalarProperty Name="terms" ColumnName="terms" />
@@ -23,6 +24,16 @@
     <EntitySetMapping Name="ActivityUsers">
       <EntityTypeMapping TypeName="KSCModel.ActivityUser">
         <MappingFragment StoreEntitySet="ActivityUser">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityWinners">
+      <EntityTypeMapping TypeName="KSCModel.ActivityWinner">
+        <MappingFragment StoreEntitySet="ActivityWinners">
           <ScalarProperty Name="activity_id" ColumnName="activity_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="id" ColumnName="id" />
@@ -82,6 +93,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="KSCModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="role_id" ColumnName="role_id" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="password" ColumnName="password" />
@@ -101,15 +113,6 @@
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="last_name" ColumnName="last_name" />
           <ScalarProperty Name="first_name" ColumnName="first_name" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ActivityWinners">
-      <EntityTypeMapping TypeName="KSCModel.ActivityWinner">
-        <MappingFragment StoreEntitySet="ActivityWinners">
-          <ScalarProperty Name="activity_id" ColumnName="activity_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

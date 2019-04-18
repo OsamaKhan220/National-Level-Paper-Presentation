@@ -1,0 +1,64 @@
+﻿@model ksc.Models.Activity
+
+@{
+    ViewBag.Title = "ViewEvent";
+}
+
+
+<div class="container" style="padding:20px; margin-bottom:50">
+    <h2>Event</h2>
+    <h3>
+        Event Name:
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.Category.name)
+    </dd>   
+    <h3>
+        Category Name:
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.description)
+    </dd>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.fee):
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.fee)
+    </dd>
+
+    <h3>
+        Eligibility Criteria:
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.eligibility_criteria)
+    </dd>
+
+    <h3>
+        Guest Name:
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.guest_name)
+    </dd>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.topic):
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.topic)
+    </dd>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.prize_details):
+    </h3>
+
+    <dd>
+        @Html.DisplayFor(model => model.prize_details)
+    </dd>
+</div>
